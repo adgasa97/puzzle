@@ -13,7 +13,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         >
-
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
         <Button
             android:text="PLAY"
             android:layout_width="match_parent"
