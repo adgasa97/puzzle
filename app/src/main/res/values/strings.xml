@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">puzzle2.0</string>
     <string name="jugar">Jugar</string>
+    <string name="foto">Foto</string>
+    <string name="mezclar">Mezclar</string>
+    <string name="resolver">Resolver</string>
 </resources>

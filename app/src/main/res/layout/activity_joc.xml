@@ -4,10 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".JocActivity">
+    tools:context=".JocActivity"
+    android:id="@+id/puzzle_container">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
+
+    <Button
+        android:id="@+id/photo_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:onClick="dispatchTakePictureIntent"
+        android:text="@string/foto" />
+
+    <Button
+        android:id="@+id/shuffle_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/photo_button"
+        android:layout_toEndOf="@+id/photo_button"
+        android:onClick="shuffleImage"
+        android:text="@string/mezclar" />
+
+    <Button
+        android:id="@+id/solve_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/shuffle_button"
+        android:onClick="solve"
+        android:text="@string/resolver" />
 
 </RelativeLayout>
