@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -15,6 +16,9 @@ import java.util.PriorityQueue;
 import java.util.Random;
 
 public class PuzzleBoardView extends View {
+
+    Context context = getContext();
+    private MediaPlayer slide;
     public static final int NUM_SHUFFLE_STEPS = 40;
     private Activity activity;
     private PuzzleBoard puzzleBoard;
@@ -44,7 +48,7 @@ public class PuzzleBoardView extends View {
                 if (animation.size() == 0) {
                     animation = null;
                     puzzleBoard.reset();
-                    Toast toast = Toast.makeText(activity, "Solved! ", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(activity, "Solucionat! ", Toast.LENGTH_LONG);
                     toast.show();
                 } else {
                     this.postInvalidateDelayed(500);
@@ -68,7 +72,10 @@ public class PuzzleBoardView extends View {
             queue.clear();
         }
     }
-
+    public void sonidoFicha(){
+        slide = MediaPlayer.create(context, R.raw.sliding);
+        slide.start();
+    }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (animation == null && puzzleBoard != null) {
@@ -77,9 +84,11 @@ public class PuzzleBoardView extends View {
                     if (puzzleBoard.click(event.getX(), event.getY())) {
                         invalidate();
                         if (puzzleBoard.resolved()) {
-                            Toast toast = Toast.makeText(activity, "Congratulations!", Toast.LENGTH_LONG);
+                            Toast toast = Toast.makeText(activity, "Felicitats!", Toast.LENGTH_LONG);
                             toast.show();
                         }
+
+                        sonidoFicha();
                         return true;
                     }
             }

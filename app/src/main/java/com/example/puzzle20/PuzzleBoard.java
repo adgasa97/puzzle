@@ -1,19 +1,23 @@
 package com.example.puzzle20;
 
+import android.app.Service;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.os.IBinder;
+
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
 
-public class PuzzleBoard {
-
+public class PuzzleBoard extends Service {
     public static int NUM_TILES = 3;
     private static final int[][] NEIGHBOUR_COORDS = {
-            { -1, 0 },
-            { 1, 0 },
-            { 0, -1 },
-            { 0, 1 }
+            {-1, 0},
+            {1, 0},
+            {0, -1},
+            {0, 1}
     };
     public ArrayList<PuzzleTile> tiles;
     public Integer steps = 0;
@@ -28,8 +32,7 @@ public class PuzzleBoard {
             for (int j = 0; j <= NUM_TILES - 1; j++) {
                 if ((i == (NUM_TILES - 1)) && (j == (NUM_TILES - 1))) {
                     tiles.add(null);
-                }
-                else {
+                } else {
                     Bitmap tile = Bitmap.createBitmap(square, j * tileWidth, i * tileWidth, tileWidth, tileWidth);
                     PuzzleTile addTile = new PuzzleTile(tile, (NUM_TILES * i) + j);
                     tiles.add(addTile);
@@ -77,6 +80,7 @@ public class PuzzleBoard {
             }
         }
         return false;
+
     }
 
     private boolean tryMoving(int tileX, int tileY) {
@@ -110,11 +114,11 @@ public class PuzzleBoard {
         PuzzleTile temp = tiles.get(i);
         tiles.set(i, tiles.get(j));
         tiles.set(j, temp);
-    }
+        }
 
-    public ArrayList<PuzzleBoard> neighbours() {
+       public ArrayList<PuzzleBoard> neighbours() {
         boolean breakOut = false;
-        int i,j = 0;
+        int i, j = 0;
         for (i = 0; i <= NUM_TILES - 1; i++) {
             for (j = 0; j <= NUM_TILES - 1; j++) {
                 if (tiles.get((NUM_TILES * i) + j) == null) {
@@ -158,5 +162,10 @@ public class PuzzleBoard {
         return previousBoard;
     }
 
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
 }
 
