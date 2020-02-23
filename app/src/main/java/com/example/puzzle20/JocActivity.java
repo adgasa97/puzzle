@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
@@ -24,7 +25,6 @@ public class JocActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joc);
-
 
         // This code programmatically adds the PuzzleBoardView to the UI.
         RelativeLayout container = (RelativeLayout) findViewById(R.id.puzzle_container);
@@ -77,8 +77,11 @@ public class JocActivity extends AppCompatActivity {
             case R.id.item1:
                 abrirInicio();
                 return true;
-            case R.id.item2:
-                abrirMusica();
+            case R.id.item3:
+                musicOn();
+                return true;
+            case R.id.item4:
+                musicOff();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -89,8 +92,32 @@ public class JocActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void abrirMusica() {
-        Intent intent = new Intent(this, MusicaActivity.class);
-        startActivity(intent);
+    public void musicOn() {
+        Intent i = new Intent(this, AudioService.class);
+        i.putExtra("action", AudioService.START);
+        startService(i);
+    }
+
+    public void musicOff() {
+        Intent i = new Intent(this, AudioService.class);
+        i.putExtra("action", AudioService.PAUSE);
+        startService(i);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+       // pausar();
+        Intent i = new Intent(this, AudioService.class);
+        i.putExtra("action", AudioService.PAUSE);
+        startService(i);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Intent i = new Intent(this, AudioService.class);
+        i.putExtra("action", AudioService.START);
+        startService(i);
     }
 }

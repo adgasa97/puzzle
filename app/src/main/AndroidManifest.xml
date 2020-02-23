@@ -18,9 +18,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".JocActivity" />
-        <activity android:name=".MusicaActivity">
-
-        </activity>
+        <service
+            android:name=".AudioService"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>
