@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.io.IOException;
 
@@ -24,6 +25,7 @@ public class IniciActivity extends AppCompatActivity implements View.OnClickList
 
     private Button btnPlay;
     private TelephonyManager mTelephonyMgr;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,9 @@ public class IniciActivity extends AppCompatActivity implements View.OnClickList
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        TextView textView = (TextView) findViewById(R.id.hola);
+        textView.setText("Hello there!"); //set text for text view
         //Obtenemos los tres botones de la interfaz
         btnPlay = (Button) findViewById(R.id.play);
         Animation animacion = AnimationUtils.loadAnimation(this,
