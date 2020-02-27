@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import java.io.IOException;
@@ -34,6 +36,9 @@ public class IniciActivity extends AppCompatActivity implements View.OnClickList
 
         //Obtenemos los tres botones de la interfaz
         btnPlay = (Button) findViewById(R.id.play);
+        Animation animacion = AnimationUtils.loadAnimation(this,
+                R.anim.animacion);
+        btnPlay.startAnimation(animacion);
 
         //Y les asignamos el controlador de eventos
         btnPlay.setOnClickListener(this);
